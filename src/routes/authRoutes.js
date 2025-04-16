@@ -42,7 +42,6 @@ router.post("/register", async (req, res) => {
     });
 
     await user.save();
-
     const token = generateToken(user._id);
     res
       .status(200)
@@ -50,10 +49,12 @@ router.post("/register", async (req, res) => {
         token,
         user: {
           id: user._id,
+          username: user.username,
           email: user.email,
           profileImmage: user.profileImage,
         },
       });
+      console.log(user.username, user.email)
   } catch (error) {
     console.log("Error in register route", error);
     res.status(500).json({ message: "Internal server error" });
