@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 job.start();
 app.use("/api/auth", router);
-app.use("api/books", bookroutes);
+app.use("/api/books", bookroutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT No: ${PORT}`);
