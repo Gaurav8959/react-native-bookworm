@@ -5,7 +5,7 @@ import protectRoute from "../middleware/auth.middleware.js";
 
 const bookroutes = express.Router();
 //Create Book
-bookroutes.post("/", protectRoute,async (req, res) => {
+bookroutes.post("/",async (req, res) => {
     try {
         const { title, caption, rating, image} = req.body;
 
