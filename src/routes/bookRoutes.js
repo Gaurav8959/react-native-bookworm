@@ -5,16 +5,18 @@ import protectRoute from "../middleware/auth.middleware.js";
 
 const bookroutes = express.Router();
 //Create Book
-bookroutes.post("/", protectRoute,async (req, res) => {
+bookroutes.post("/create", protectRoute,async (req, res) => {
     try {
         const { title, caption, rating, image} = req.body;
 
-        if (!title, !caption, !rating, !image) {
+        if (!title || !caption || !rating || !image) {
             return res.status(400).json({ message: "Please provide all fields"});
         }
-
+        console.log("Pass one")
        const uploadResponse = await cloudinary.uploader.upload(image);
+       console.log("Pass two", uploadResponse)
        const imageUrl = uploadResponse.secure_url;
+       console.log("Pass three==>",imageUrl)
        const newBook = new Book({
         title,
         caption,
@@ -26,8 +28,8 @@ bookroutes.post("/", protectRoute,async (req, res) => {
        await newBook.save();
        res.status(201).json(newBook);
     } catch (error) {
-        console.log("Error Creating book");
-        res.status(500).json({ message: error.message});
+        console.log("Error Creating book", error);
+    res.status(500).json({ message: error.message });
     }
 });
 
