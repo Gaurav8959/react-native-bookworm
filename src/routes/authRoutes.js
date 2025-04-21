@@ -83,7 +83,7 @@ router.post("/login", async (req, res) => {
         user: {
           id: user._id,
           email: user.email,
-          profileImmage: user.profileImage,
+          profileImage: user.profileImage,
         },
       });
   } catch (error) {
