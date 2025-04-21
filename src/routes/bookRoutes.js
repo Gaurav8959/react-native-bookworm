@@ -31,7 +31,7 @@ bookroutes.post("/create", protectRoute, async (req, res) => {
 });
 
 //Get books
-bookroutes.get("/", protectRoute, async (req, res) => {
+bookroutes.get("/", protectRoute, async (req, res) => { 
   try {
     const page = req.query.page || 1;
     const limit = req.query.limit || 5;
@@ -61,6 +61,7 @@ bookroutes.get("/user", protectRoute, async (req, res) => {
     const book = await Book.find({ user: req.user._id }).sort({
       createdAt: -1,
     });
+    res.json(book)
   } catch (error) {
     console.error("Get user books error:", error.message);
     res.status(500).json({ message: "Server error" });
